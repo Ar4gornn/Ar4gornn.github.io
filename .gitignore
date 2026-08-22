@@ -21,3 +21,29 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# --- Claude / agent memory & local notes (never push) ---
+CLAUDE.md
+CLAUDE.local.md
+LOG.md
+STATE.md
+.claude/
+.bmad-core/
+.bmad*/
+*.local.md
+*.local.*
+
+# --- secrets ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+appsettings.*.Local.json
+
+# --- BMAD working artifacts (v6 installs to bmad/, v4 to .bmad-core/) ---
+bmad/
+_bmad/
+.bmad/
+bmad-output/
