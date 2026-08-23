@@ -72,12 +72,13 @@ const projects = [
     description:
       "A React 19 single-page app with react-router-dom v7. Every card, route and detail page renders from one registry module, so a project appears on the site by adding a single entry. Deployed as a static build, with a 404 fallback so deep links survive a hard refresh on GitHub Pages.",
     stack: ["React 19", "react-router-dom 7", "Create React App"],
-    repoUrl: null,
-    liveUrl: null,
-    status: "in-progress",
+    repoUrl: "https://github.com/Ar4gornn/Ar4gornn.github.io",
+    liveUrl: "https://ar4gornn.github.io",
+    status: "shipped",
     highlights: [
       "One registry module drives cards, routes and detail pages",
       "Dark-mode aware, responsive, no CSS framework",
+      "Deep links survive a hard refresh via a 404.html copy of the app shell",
     ],
     screenshot: null,
     demo: null,

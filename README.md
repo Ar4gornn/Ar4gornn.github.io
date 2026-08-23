@@ -1,5 +1,9 @@
 # Ar4gornn.github.io
 
+[![deploy](https://github.com/Ar4gornn/Ar4gornn.github.io/actions/workflows/pages.yml/badge.svg)](https://github.com/Ar4gornn/Ar4gornn.github.io/actions/workflows/pages.yml)
+
+Live at **https://ar4gornn.github.io**.
+
 The portfolio site — a React single-page app that lists what I have built, with a page per project
 and a live demo where the project can run in a browser.
 
