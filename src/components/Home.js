@@ -14,9 +14,10 @@ function Home() {
       <section className="hero">
         <h1>Alex Ghanem</h1>
         <p className="lede">
-          Backend-leaning developer working mostly in .NET and Django, with React on the front. I
-          like small services with clear boundaries — a controller that only does HTTP, a service
-          that holds the rules, and tests that would actually catch a regression.
+          AI engineer. I work mostly in Python, with .NET and Django behind the services I build
+          and React on the front, and I build games in Godot. I like small services with clear
+          boundaries — a controller that only does HTTP, a service that holds the rules, and tests
+          that would actually catch a regression.
         </p>
         <p className="links">
           <a href="https://github.com/Ar4gornn" target="_blank" rel="noreferrer">
