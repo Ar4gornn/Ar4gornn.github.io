@@ -69,6 +69,25 @@ const projects = [
     demo: null,
   },
   {
+    slug: "tokenlens",
+    title: "tokenlens",
+    tagline: "A tokenizer that shows its working, not just its answer.",
+    description:
+      "Paste text and see how a language model actually chops it up. The signature view is the merge ladder: byte-pair encoding replayed step by step, from individual characters up to the final tokens, in the order the merges really happened. Both tokenizers are implemented from scratch — GPT-2's BPE and BERT's WordPiece, opposite algorithms shown side by side. No backend, no network call at runtime, nothing you paste leaves the page.",
+    stack: ["TypeScript", "React 19", "Vite", "Vitest"],
+    repoUrl: "https://github.com/Ar4gornn/tokenlens",
+    liveUrl: "https://ar4gornn.github.io/tokenlens/",
+    status: "shipped",
+    highlights: [
+      "Merge ladder animates BPE one merge at a time, showing each pair's rank",
+      "BPE and WordPiece compared live — opposite algorithms, not two vocabularies",
+      "BPE verified differentially against a reference on 300+ generated inputs",
+      "Zero tokenizer dependencies in the shipped bundle",
+    ],
+    screenshot: null,
+    demo: null,
+  },
+  {
     slug: "portfolio",
     title: "This site",
     tagline: "The shop window, built from one registry file.",
