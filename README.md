@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Ar4gornn.github.io
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The portfolio site — a React single-page app that lists what I have built, with a page per project
+and a live demo where the project can run in a browser.
 
-## Available Scripts
+Served at the root of a GitHub user site, so there is deliberately **no `homepage` field and no
+router `basename`**. The build stays host-agnostic: moving off GitHub Pages should cost nothing.
 
-In the project directory, you can run:
+## Adding a project
 
-### `npm start`
+Add one entry to [`src/data/projects.js`](src/data/projects.js). That is the whole job — cards,
+routes and detail pages all render from it.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```js
+{
+  slug: "my-project",
+  title: "MyProject",
+  tagline: "One line that says what it is.",
+  description: "A paragraph, written from the code rather than the plan.",
+  stack: ["React", "Node"],
+  repoUrl: "https://github.com/Ar4gornn/MyProject", // null until it is public
+  liveUrl: null,                                     // only if it has been seen responding
+  status: "shipped",                                 // shipped | in-progress | archived
+  highlights: ["What it actually does", "…"],
+  screenshot: null,                                  // only if the file exists
+  demo: null,                                        // route segment under /demos, or null
+}
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If a project ever needs more than that entry plus a `/demos` route to appear, the registry has
+stopped being the source of truth — fix that rather than working around it.
 
-### `npm test`
+## Routes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Route | Page |
+|---|---|
+| `/` | Home — intro and the shipped projects |
+| `/projects` | Every project, including in-progress |
+| `/projects/:slug` | Project detail |
+| `/demos/url-shortener` | Live URL shortener demo |
+| `*` | 404 |
 
-### `npm run build`
+## Develop
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+npm start          # http://localhost:3000
+npm test           # React Testing Library
+npm run build      # production build into build/
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Deploy
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml) builds on push to `main`, runs the
+tests, and publishes to GitHub Pages.
 
-### `npm run eject`
+GitHub Pages serves static files, so a deep link such as `/projects/url-shortener` is a 404 at the
+server before the app ever loads. The workflow copies `build/index.html` to `build/404.html`, which
+makes Pages serve the same app shell for unknown paths and lets the router resolve the URL on the
+client. A hard refresh on a deep link therefore works.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Notes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**The URL shortener demo needs a local API.** It posts to `http://localhost:5251`, so it only works
+while [UrlShortenerAPI](https://github.com/Ar4gornn/UrlShortenerAPI) is running on the same machine.
+On the deployed site the request fails, and the page says so rather than faking a result.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Two test-only workarounds live in `package.json` and `src/setupTests.js`:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `react-router-dom@7.5.3` declares `"main": "./dist/main.js"`, a file it does not ship. Webpack
+  resolves through the `exports` field and is unaffected; Jest resolves through `main` and fails
+  with *Cannot find module*. `jest.moduleNameMapper` points `react-router-dom` and
+  `react-router/dom` straight at their real builds.
+- The jsdom environment Create React App ships does not define `TextEncoder`, which react-router's
+  CommonJS bundle constructs at module scope. `setupTests.js` supplies it from Node's `util`.
 
-## Learn More
+Remove both once the upstream packaging is fixed.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT — see [LICENSE](LICENSE).

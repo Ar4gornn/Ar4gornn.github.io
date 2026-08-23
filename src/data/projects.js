@@ -1,0 +1,91 @@
+// Single source of truth for the portfolio.
+//
+// Adding a project means adding ONE entry here. Nothing else.
+//
+// Honesty rules, enforced by review:
+//   status    - reflects what runs on disk, not what is planned.
+//   repoUrl   - null until the repo is public. Never link a 404.
+//   liveUrl   - only if it has been seen responding.
+//   screenshot- only if the file exists in public/screenshots/.
+//   demo      - the route segment under /demos, or null if there is nothing to play with.
+
+const projects = [
+  {
+    slug: "url-shortener",
+    title: "UrlShortenerAPI",
+    tagline: "Long URL in, eight characters out, 302 back.",
+    description:
+      "A REST API that shortens URLs and redirects them. Posting a URL returns an eight-character token; requesting the token returns a 302 to the original. Posting a URL that already exists returns the token it already has rather than minting a second one. Links expire thirty days after creation, and the expiry is checked on read rather than swept in the background.",
+    stack: [".NET 8", "ASP.NET Core", "EF Core", "PostgreSQL", "xUnit"],
+    repoUrl: "https://github.com/Ar4gornn/UrlShortenerAPI",
+    liveUrl: null,
+    status: "shipped",
+    highlights: [
+      "Two endpoints: POST /api/urls and GET /api/urls/{token}",
+      "Controller handles HTTP only; rules live in an injected service",
+      "Three EF Core migrations tracked in the repo",
+      "13 xUnit tests over the controller and the service",
+    ],
+    screenshot: null,
+    demo: "url-shortener",
+  },
+  {
+    slug: "songparty",
+    title: "SongParty",
+    tagline: "Shared listening rooms with six-letter join codes.",
+    description:
+      "A Django REST Framework backend and a React frontend served from the same Django project. A host creates a room and receives a six-letter code; guests join with it. The host controls whether guests may pause and how many votes are needed to skip. Identity is the Django session key, so there are no accounts and no passwords. A learning build that follows a well-known tutorial's structure, and its README says so.",
+    stack: ["Django 5.2", "Django REST Framework", "React 17", "Material-UI v4", "SQLite"],
+    repoUrl: "https://github.com/Ar4gornn/SongParty",
+    liveUrl: null,
+    status: "shipped",
+    highlights: [
+      "Seven DRF endpoints covering the full room lifecycle",
+      "Room codes regenerate until unique",
+      "Host-only settings enforced with a 403 on the update path",
+      "No music playback yet, despite the name",
+    ],
+    screenshot: null,
+    demo: null,
+  },
+  {
+    slug: "inventory-management",
+    title: "InventoryManagementSystem",
+    tagline: "A .NET 8 inventory API, currently a scaffold.",
+    description:
+      "A .NET 8 project whose folder layout anticipates a layered design. The layers are not built yet: Application, Contracts, Persistence, Services and WebApi are empty, and there are no controllers, so nothing is exposed over HTTP. It compiles because there is little in it beyond Program.cs. Listed here as in-progress rather than hidden.",
+    stack: [".NET 8", "ASP.NET Core"],
+    repoUrl: null,
+    liveUrl: null,
+    status: "in-progress",
+    highlights: [
+      "Solution builds clean with zero warnings",
+      "Endpoints, DTOs, validation and tests are the next slice",
+    ],
+    screenshot: null,
+    demo: null,
+  },
+  {
+    slug: "portfolio",
+    title: "This site",
+    tagline: "The shop window, built from one registry file.",
+    description:
+      "A React 19 single-page app with react-router-dom v7. Every card, route and detail page renders from one registry module, so a project appears on the site by adding a single entry. Deployed as a static build, with a 404 fallback so deep links survive a hard refresh on GitHub Pages.",
+    stack: ["React 19", "react-router-dom 7", "Create React App"],
+    repoUrl: null,
+    liveUrl: null,
+    status: "in-progress",
+    highlights: [
+      "One registry module drives cards, routes and detail pages",
+      "Dark-mode aware, responsive, no CSS framework",
+    ],
+    screenshot: null,
+    demo: null,
+  },
+];
+
+export function getProject(slug) {
+  return projects.find((p) => p.slug === slug) || null;
+}
+
+export default projects;
