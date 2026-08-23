@@ -53,7 +53,7 @@ const projects = [
     title: "InventoryManagementSystem",
     tagline: "Stock you cannot fake, because quantity is never stored.",
     description:
-      "A .NET 8 API and a React front end for tracking stock, built around one decision: there is no quantity column. Stock on hand is the sum of a product's append-only movement log, so the history is the only source of truth and the two can never drift apart. A mistake is corrected by recording a compensating movement rather than editing the past, and a movement that would take stock below zero is rejected rather than clamped. The UI is built to make that visible — it shows the derived total next to the movements it was summed from, so the rule is on screen rather than buried in a service class.",
+      "A .NET 8 API and a React front end for tracking stock, built around one decision: there is no quantity column. Stock on hand is the sum of a product's append-only movement log, so the history is the only source of truth and the two can never drift apart. A mistake is corrected by recording a compensating movement rather than editing the past, and a movement that would take stock below zero is rejected rather than clamped. The UI is built to make that visible — it shows the derived total next to the movements it was summed from, so the rule is on screen rather than buried in a service class, and it drives the whole API: products and categories are created, edited and deleted from it. Where the API refuses — a product whose movements would be lost, a category that still holds products — the UI shows that refusal and its reason rather than hiding it behind a generic failure.",
     stack: [
       ".NET 8",
       "ASP.NET Core",
@@ -72,6 +72,8 @@ const projects = [
       "Stock derived from an append-only movement log, never a stored column",
       "Below-zero movements rejected with the balance named, never silently clamped",
       "React UI puts the derived total beside the history that produced it",
+      "Products and categories created, edited and deleted from the UI",
+      "A refused delete shows the API's reason, including what is blocking it",
       "CSV bulk import reporting per-row failures instead of rejecting the file",
       "API key checked before the lookup, so a 401 cannot leak which ids exist",
       "86 tests across three layers: rules, real SQLite, and the live HTTP pipeline",
