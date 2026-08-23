@@ -4,11 +4,11 @@ import usePageTitle from "../usePageTitle";
 
 // The standard container every demo mounts into. Gives each one the same
 // heading, back link, and honest note about what it needs to work.
-function DemoFrame({ title, requires, children }) {
+function DemoFrame({ title, requires, wide = false, children }) {
   usePageTitle(title);
 
   return (
-    <section className="demo">
+    <section className={wide ? "demo demo-wide" : "demo"}>
       <p className="crumb">
         <Link to="/projects">← Projects</Link>
       </p>

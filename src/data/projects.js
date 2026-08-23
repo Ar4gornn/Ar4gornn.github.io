@@ -8,6 +8,9 @@
 //   liveUrl   - only if it has been seen responding.
 //   screenshot- only if the file exists in public/screenshots/.
 //   demo      - the route segment under /demos, or null if there is nothing to play with.
+//   embedUrl  - a page that stands on its own and is safe to put in an iframe on
+//               the detail page, or null. Only for something already deployed and
+//               seen working; an iframe of a dead URL is a blank box.
 
 const projects = [
   {
@@ -66,7 +69,7 @@ const projects = [
       "xUnit",
     ],
     repoUrl: "https://github.com/Ar4gornn/InventoryManagementSystem",
-    liveUrl: null,
+    liveUrl: "https://ar4gornn.github.io/InventoryManagementSystem/",
     status: "shipped",
     highlights: [
       "Stock derived from an append-only movement log, never a stored column",
@@ -79,7 +82,8 @@ const projects = [
       "86 tests across three layers: rules, real SQLite, and the live HTTP pipeline",
     ],
     screenshot: null,
-    demo: null,
+    demo: "inventory",
+    embedUrl: "https://ar4gornn.github.io/InventoryManagementSystem/",
   },
   {
     slug: "tokenlens",

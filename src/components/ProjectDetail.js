@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import ProjectEmbed from "./ProjectEmbed";
 import { getProject } from "../data/projects";
 import usePageTitle from "../usePageTitle";
 
@@ -36,6 +37,14 @@ function ProjectDetail() {
 
       {project.screenshot && (
         <img className="shot" src={project.screenshot} alt={`${project.title} screenshot`} />
+      )}
+
+      {project.embedUrl && (
+        <ProjectEmbed
+          url={project.embedUrl}
+          title={project.title}
+          caption="A live demo, running in your browser rather than against a server."
+        />
       )}
 
       <p>{project.description}</p>

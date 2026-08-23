@@ -252,7 +252,15 @@ h2 {
 
 /* ---------- detail ---------- */
 
+/* The column is the site's full measure so an embedded app can use it. Prose is
+   pulled back to a readable width per element instead - centring a break-out on
+   this container would be wrong, because it sits left-aligned inside the site
+   column rather than centred in it. */
 .detail {
+  max-width: var(--maxw);
+}
+
+.detail > *:not(.embed) {
   max-width: 60ch;
 }
 
@@ -274,9 +282,44 @@ h2 {
   border-radius: var(--radius);
 }
 
+/* ---------- embedded demo ---------- */
+
+.embed {
+  margin: 1.5rem 0;
+}
+
+.embed iframe {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.embed figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.detail .embed {
+  width: 100%;
+}
+
 /* ---------- demo ---------- */
 
 .demo {
+  max-width: 60ch;
+}
+
+/* An embedded app needs the width. The prose around it still does not, so it
+   keeps a readable measure while the iframe spans the wider section. */
+.demo-wide {
+  max-width: 78rem;
+}
+
+.demo-wide .demo-body > p,
+.demo-wide .demo-body > ul {
   max-width: 60ch;
 }
 

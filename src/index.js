@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Projects from "./components/Projects";
 import ProjectDetail from "./components/ProjectDetail";
 import Shortener from "./components/Shortener";
+import InventoryDemo from "./components/InventoryDemo";
 import NotFound from "./components/NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -23,6 +24,7 @@ root.render(
 
           {/* One route per playable demo. */}
           <Route path="/demos/url-shortener" element={<Shortener />} />
+          <Route path="/demos/inventory" element={<InventoryDemo />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
